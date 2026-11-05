@@ -7,6 +7,7 @@ Token diketik dari terminal, lalu halaman web menampilkannya dengan ukuran huruf
 ## Fitur
 
 - **Tampilan layar penuh** — token ditampilkan besar, di tengah layar, dengan latar gelap.
+- **Tipografi Inter** — memakai font [Inter](https://rsms.me/inter/) yang di-embed ke dalam binary, jadi tampilan tetap konsisten tanpa koneksi internet.
 - **Responsif** — ukuran teks dihitung otomatis agar muat di jendela, baik token pendek maupun panjang.
 - **Update real-time** — perubahan token dikirim ke browser lewat Server-Sent Events (SSE).
 - **Latar ambient dinamis** — gumpalan cahaya beranimasi lembut di belakang teks (otomatis nonaktif jika pengguna memilih *reduced motion*).
@@ -52,10 +53,11 @@ Menekan Enter dengan input kosong akan ditolak; token tidak boleh kosong.
 
 ## Endpoint
 
-| Metode | Path      | Keterangan                                            |
-| ------ | --------- | ----------------------------------------------------- |
-| GET    | `/`       | Halaman utama yang menampilkan token                  |
-| GET    | `/events` | Stream SSE berisi token terbaru untuk update real-time |
+| Metode    | Path                    | Keterangan                                              |
+| --------- | ----------------------- | ------------------------------------------------------- |
+| GET       | `/`                     | Halaman utama yang menampilkan token                    |
+| GET       | `/events`               | Stream SSE berisi token terbaru untuk update real-time  |
+| GET, HEAD | `/assets/fonts/*.woff2` | File font Inter yang di-embed ke dalam binary           |
 
 Metode selain `GET` akan dibalas `405 Method Not Allowed`.
 
@@ -65,6 +67,8 @@ Metode selain `GET` akan dibalas `405 Method Not Allowed`.
 .
 ├── main.go      # Seluruh aplikasi: server, template halaman, dan logika token
 ├── go.mod       # Definisi module Go
+├── assets/
+│   └── fonts/   # Font Inter (woff2) yang di-embed ke binary + lisensi OFL
 └── .gitignore   # Abaikan binary, secret, file OS/editor
 ```
 
@@ -74,6 +78,7 @@ Metode selain `GET` akan dibalas `405 Method Not Allowed`.
 - Server hanya mendengarkan di `127.0.0.1`, jadi halaman tidak dapat diakses dari perangkat lain di jaringan.
 - Port `8080` masih hard-code. Jika port sedang dipakai, aplikasi akan berhenti dengan pesan kesalahan.
 - Halaman ini tidak memiliki autentikasi karena diperuntukkan bagi pemakaian lokal.
+- Font Inter di-embed ke binary dan dilisensikan di bawah [SIL Open Font License 1.1](assets/fonts/LICENSE.txt).
 
 ## Lisensi
 
