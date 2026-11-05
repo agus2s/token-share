@@ -67,6 +67,7 @@ Metode selain `GET` akan dibalas `405 Method Not Allowed`.
 .
 ├── main.go      # Seluruh aplikasi: server, template halaman, dan logika token
 ├── go.mod       # Definisi module Go
+├── LICENSE      # Lisensi MIT
 ├── assets/
 │   └── fonts/   # Font Inter (woff2) yang di-embed ke binary + lisensi OFL
 └── .gitignore   # Abaikan binary, secret, file OS/editor
@@ -82,4 +83,4 @@ Metode selain `GET` akan dibalas `405 Method Not Allowed`.
 
 ## Lisensi
 
-Belum ditentukan.
+Proyek ini dirilis di bawah [Lisensi MIT](LICENSE).
