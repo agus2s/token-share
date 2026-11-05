@@ -1,0 +1,87 @@
+# --- Go build artifacts ---
+# Binary yang dihasilkan dari `go build` / `go install`
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/token-share
+/tokenapp
+/tokenshare
+
+# Folder hasil build
+/bin/
+/dist/
+/build/
+
+# --- Go tooling ---
+# Dependency & cache lokal
+/vendor/
+go.work
+go.work.sum
+*.prof
+cover.out
+coverage.txt
+coverage.html
+
+# --- Konfigurasi & secret ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+config.local.*
+*.local.json
+
+# --- Runtime & data ---
+# File yang dibuat saat aplikasi berjalan
+*.log
+logs/
+tmp/
+temp/
+/data/
+*.db
+*.sqlite
+*.sqlite3
+*.pid
+*.sock
+
+# --- OS ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# --- Editor & IDE ---
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains (GoLand, IntelliJ)
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
+\#*#
+.#*
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
