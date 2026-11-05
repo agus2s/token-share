@@ -29,15 +29,69 @@ const pageTemplate = `<!DOCTYPE html>
 			display: flex;
 			flex-direction: column;
 			align-items: stretch;
-			background: #111;
+			background:
+				radial-gradient(ellipse at 50% 0%, #141a2b 0%, transparent 55%),
+				#0a0a0c;
 			color: #fff;
 			font-family: monospace;
 			overflow: hidden;
 		}
-		header, footer { text-align: center; padding: 1rem; flex: 0 0 auto; }
+		/* Latar ambient: gumpalan cahaya yang bergerak pelan. */
+		.ambient {
+			position: fixed;
+			inset: 0;
+			z-index: 0;
+			overflow: hidden;
+			pointer-events: none;
+		}
+		.blob {
+			position: absolute;
+			width: 55vmax;
+			height: 55vmax;
+			border-radius: 50%;
+			filter: blur(70px);
+			opacity: 0.3;
+			will-change: transform;
+			animation: drift 28s ease-in-out infinite alternate;
+		}
+		.blob-1 {
+			top: -20vmax;
+			left: -15vmax;
+			background: radial-gradient(circle, #4f46e5 0%, transparent 65%);
+			animation-name: drift-a;
+		}
+		.blob-2 {
+			top: -10vmax;
+			right: -20vmax;
+			background: radial-gradient(circle, #0ea5e9 0%, transparent 65%);
+			animation-name: drift-b;
+			animation-duration: 34s;
+		}
+		.blob-3 {
+			bottom: -25vmax;
+			left: 20vmax;
+			background: radial-gradient(circle, #14b8a6 0%, transparent 65%);
+			animation-name: drift-c;
+			animation-duration: 40s;
+		}
+		@keyframes drift-a {
+			from { transform: translate3d(0, 0, 0) scale(1); }
+			to   { transform: translate3d(12vw, 10vh, 0) scale(1.15); }
+		}
+		@keyframes drift-b {
+			from { transform: translate3d(0, 0, 0) scale(1.1); }
+			to   { transform: translate3d(-14vw, 12vh, 0) scale(0.95); }
+		}
+		@keyframes drift-c {
+			from { transform: translate3d(0, 0, 0) scale(0.95); }
+			to   { transform: translate3d(10vw, -12vh, 0) scale(1.2); }
+		}
+		header, footer { position: relative; z-index: 1; text-align: center; padding: 1rem; flex: 0 0 auto; }
 		header { font-size: clamp(1rem, 2.5vw, 1.5rem); }
-		footer { font-size: clamp(0.8rem, 2vw, 1.1rem); }
+		footer { font-size: clamp(0.8rem, 2vw, 1.1rem); color: rgba(255, 255, 255, 0.75); }
 		main {
+			position: relative;
+			z-index: 1;
 			flex: 1 1 auto;
 			min-height: 0;
 			display: flex;
@@ -55,10 +109,19 @@ const pageTemplate = `<!DOCTYPE html>
 			overflow-wrap: anywhere;
 			line-height: 1.1;
 			max-width: 100%;
+			text-shadow: 0 0 0.35em rgba(10, 10, 12, 0.85);
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.blob { animation: none; }
 		}
 	</style>
 </head>
 <body>
+	<div class="ambient" aria-hidden="true">
+		<span class="blob blob-1"></span>
+		<span class="blob blob-2"></span>
+		<span class="blob blob-3"></span>
+	</div>
 	<header>Token hari ini</header>
 	<main><div class="token" id="token">{{.Token}}</div></main>
 	<footer>Umur token: <span id="age">0</span> menit</footer>
